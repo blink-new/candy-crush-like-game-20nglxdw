@@ -15,7 +15,7 @@ import {
   calculateScore,
   getLevelData
 } from '@/lib/game-utils';
-import useSound from 'use-sound';
+import { useGameSound } from '@/hooks/use-game-sound';
 
 function App() {
   const [gameState, setGameState] = useState<GameState>({
@@ -28,10 +28,10 @@ function App() {
     gameStatus: 'idle'
   });
   
-  const [playMatchSound] = useSound('/sounds/match.mp3', { volume: 0.5 });
-  const [playLevelUpSound] = useSound('/sounds/level-up.mp3', { volume: 0.7 });
-  const [playGameOverSound] = useSound('/sounds/game-over.mp3', { volume: 0.7 });
-  const [playSpecialSound] = useSound('/sounds/special.mp3', { volume: 0.6 });
+  const [playMatchSound] = useGameSound('/sounds/match.mp3', { volume: 0.5 });
+  const [playLevelUpSound] = useGameSound('/sounds/level-up.mp3', { volume: 0.7 });
+  const [playGameOverSound] = useGameSound('/sounds/game-over.mp3', { volume: 0.7 });
+  const [playSpecialSound] = useGameSound('/sounds/special.mp3', { volume: 0.6 });
 
   // Initialize game
   const initGame = (level: number) => {

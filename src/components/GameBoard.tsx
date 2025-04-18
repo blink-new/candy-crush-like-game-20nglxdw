@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CandyItem } from '@/types/game';
 import { Candy } from './Candy';
-import useSound from 'use-sound';
+import { useGameSound } from '@/hooks/use-game-sound';
 
 interface GameBoardProps {
   board: CandyItem[][];
@@ -13,8 +13,8 @@ interface GameBoardProps {
 
 export const GameBoard = ({ board, onSwap, isInteractive }: GameBoardProps) => {
   const [selectedCandy, setSelectedCandy] = useState<{ row: number; col: number } | null>(null);
-  const [playSwapSound] = useSound('/sounds/swap.mp3', { volume: 0.5 });
-  const [playInvalidSound] = useSound('/sounds/invalid.mp3', { volume: 0.3 });
+  const [playSwapSound] = useGameSound('/sounds/swap.mp3', { volume: 0.5 });
+  const [playInvalidSound] = useGameSound('/sounds/invalid.mp3', { volume: 0.3 });
 
   const handleCandyClick = (row: number, col: number) => {
     if (!isInteractive) return;
@@ -43,8 +43,8 @@ export const GameBoard = ({ board, onSwap, isInteractive }: GameBoardProps) => {
       <div 
         className="grid gap-1"
         style={{ 
-          gridTemplateColumns: `repeat(${board[0].length}, minmax(0, 1fr))`,
-          gridTemplateRows: `repeat(${board.length}, minmax(0, 1fr))`
+          gridTemplateColumns: `repeat(${board[0]?.length || 1}, minmax(0, 1fr))`,
+          gridTemplateRows: `repeat(${board.length || 1}, minmax(0, 1fr))`
         }}
       >
         <AnimatePresence>
